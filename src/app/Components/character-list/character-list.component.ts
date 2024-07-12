@@ -12,6 +12,8 @@ export class CharacterListComponent implements OnInit{
   currentPage: number = 1;
   totalPages?: any
 
+  filteredPages: number[]= [1,2,3]
+
   constructor(private rickMortyService: RickMortyService) { }
 
   ngOnInit(): void {
@@ -32,25 +34,22 @@ export class CharacterListComponent implements OnInit{
     if (this.currentPage < this.totalPages) {
       this.loadCharacters(this.currentPage + 1)
     }
+    this.filteredPages = [this.currentPage - 1, this.currentPage, this.currentPage + 1]
   }
 
   previousPage(): void {
     if (this.currentPage > 1) {
       this.loadCharacters(this.currentPage - 1)
     }
+    this.filteredPages = [this.currentPage - 1, this.currentPage, this.currentPage + 1 ]
   }
 
   goToPage(pageNumber: number): void {
     if (pageNumber > 0 && pageNumber <= this.totalPages) {
       this.loadCharacters(pageNumber)
     }
-  }
-
-  getPages(): number[] {
-    const pages: number[] = []
-    for (let i = 0; i < this.totalPages; i++) {
-      pages.push(i)
+    if (pageNumber > 0 && pageNumber <= this.totalPages){
+      this.filteredPages = [pageNumber - 1, pageNumber, pageNumber + 1]
     }
-    return pages
-  }
+    }
 }

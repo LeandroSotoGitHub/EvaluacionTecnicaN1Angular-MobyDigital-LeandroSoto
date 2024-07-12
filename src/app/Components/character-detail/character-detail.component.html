@@ -1,1 +1,24 @@
-
+<div class="container mt-4" *ngIf="character">
+    <div class="row">
+        <div class="col-md-3 bg-dark p-3 m-2">
+            <img [src]="character.image" [alt]="character.name" class="img-fluid rounded">
+                <div class="mt-3 text-light">
+                    <h2>{{ character.name }}</h2>
+                    <p><strong>Status:</strong> {{ character.status }}</p>
+                    <p><strong>Species:</strong> {{ character.species }}</p>
+                    <p><strong>Gender:</strong> {{ character.gender }}</p>
+                    <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+                    <p><strong>Location:</strong> {{ character.location.name }}</p>
+                </div>
+        </div>
+        <div class="col-md-6">
+            
+            <h3 class="mt-10">List of Episodes appearances</h3>
+            <ul class="list-group">
+            <li class="list-group-item" *ngFor="let episode of episodes">
+                Episode {{ episode }}
+            </li>
+            </ul>
+        </div>
+    </div>
+</div>

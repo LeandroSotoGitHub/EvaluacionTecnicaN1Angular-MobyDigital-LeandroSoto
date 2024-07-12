@@ -1,7 +1,7 @@
 <div class="container-fluid bg-dark text-light py-4 p-5">
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
       <div class="col" *ngFor="let character of characters">
-            <div class="card bg-secondary">
+            <div class="card bg-secondary" [routerLink]="['/characters', character.id]">
                 <img src="{{character.image}}" class="card-img-top" alt="{{character.name}}">
                 <div class="card-body">
                     <p class="card-text text-light">{{ character.name }}</p>
@@ -15,13 +15,13 @@
     <nav aria-label="Page navigation" class="mt-4">
         <ul class="pagination justify-content-center">
         <li class="page-item">
-            <button class="page-link bg-secondary text-light" [ariaDisabled]="currentPage === 1" (click)="previousPage()">Previous</button>
+            <a class="page-link bg-secondary text-light" [ariaDisabled]="currentPage === 1" (click)="previousPage()">Previous</a>
         </li>
-        <li class="page-item"> 
-            <button class="page bg-secondary text-light" *ngFor="let page of getPages()" (click)="goToPage(page)"> {{ page }}</button>
+        <li class="page-item" *ngFor="let page of filteredPages" > 
+            <a class="page-link bg-secondary text-light" (click)="goToPage(page)"> {{ page }} </a>
         </li>
         <li class="page-item">
-            <button class="page-link bg-secondary text-light" (click)="nextPage()">Next</button>
+            <a class="page-link bg-secondary text-light" (click)="nextPage()">Next</a>
         </li>
         </ul>
     </nav>
