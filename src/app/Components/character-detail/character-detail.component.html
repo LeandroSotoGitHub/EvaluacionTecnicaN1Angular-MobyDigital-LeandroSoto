@@ -1,21 +1,29 @@
-<div class="container mt-4" *ngIf="character">
+<div class="container-fluid mt-4" *ngIf="character">
     <div class="row">
         <div class="col-md-3 bg-dark p-3 m-2" style="height: fit-content;">
             <img [src]="character.image" [alt]="character.name" class="img-fluid rounded">
-                <div class="mt-3 text-light border border-secondary">
-                    <h2 class="border border-secondary">{{ character.name }}</h2>
-                    <p [ngClass]="getStatusClass(character.status)"><strong>Status:</strong> {{ character.status | statusPipe }}</p>
-                    <p><strong>Species:</strong> {{ character.species }}</p>
-                    <p><strong>Gender:</strong> {{ character.gender | genderPipe }}</p>
-                    <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-                    <p><strong>Location:</strong> {{ character.location.name }}</p>
-                </div>
+            <div class="mt-3 text-light">
+                <h4 class="border-bottom pb-2">Character Info</h4>
+                <p><strong>Name:</strong> {{ character.name }}</p>
+                <p [ngClass]="getStatusClass(character.status)"><strong>Status:</strong> {{ character.status | statusPipe }}</p>
+                <p><strong>Species:</strong> {{ character.species }}</p>
+                <p><strong>Gender:</strong> {{ character.gender | genderPipe }}</p>
+                <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+                <p><strong>Location:</strong> {{ character.location.name }}</p>
+            </div>
         </div>
-        <div class="col-md-7 bg-dark text-light p-3 m-2 border border-secondary">
-            <h3 class="mt-10 border border-secondary">List of Episodes appearances</h3>
-                <div class="border border-secondary">
-                    <p class="" *ngFor="let episode of episodes"> Episode {{ episode }}</p>
-                </div>
+        <div class="col-md-8 bg-dark text-light p-3 m-2">
+            <h4 class="border-bottom pb-2">List of Episodes appearances</h4>
+            <div>
+                <p *ngFor="let episode of visibleEpisodes" class="mb-1">
+                    <a href="#" class="text-primary">{{ episode }}</a>
+                </p>
+                <button *ngIf="hasMoreEpisodes" 
+                        (click)="showMoreEpisodes()" 
+                        class="btn btn-link text-primary mt-2">
+                    (more)
+                </button>
+            </div>
         </div>
     </div>
 </div>
