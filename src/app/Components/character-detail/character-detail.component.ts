@@ -28,4 +28,14 @@ export class CharacterDetailComponent implements OnInit {
       this.episodes = data.episode ;
     });
   }
+
+  getStatusClass(status: string): string {
+    if (status === 'Alive') {
+      return 'text-success'
+    } else if (status === 'Dead'){
+      return 'text-danger'
+    } else {
+      return 'text-warning'
+    }
+  }
 }
