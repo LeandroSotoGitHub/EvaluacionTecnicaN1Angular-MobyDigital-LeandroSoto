@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Character } from '../Models/character.model';
@@ -12,15 +12,16 @@ export class RickMortyService {
   
   constructor(private http: HttpClient) { }
 
-  getCharacters(): Observable<Character> {
-    return this.http.get<Character>(`${this.baseUrl}/character`);
+  getAllCharacters(page: number = 1): Observable<Character[]> {
+    let params = new HttpParams().set('page', page.toString() )
+    return this.http.get<Character[]>(`${this.baseUrl}/character`, {params});
   }
 
-  getCharacter(id: number): Observable<Character> {
-    return this.http.get<Character>(`${this.baseUrl}/character/${id}`);
+  getOneCharacter(id: number): Observable<Character[]> {
+    return this.http.get<Character[]>(`${this.baseUrl}/character/${id}`);
   }
 
-  getEpisodes(): Observable<Episode> {
+  getAllEpisodes(): Observable<Episode> {
     return this.http.get<Episode>(`${this.baseUrl}/episode`);
   }
 
